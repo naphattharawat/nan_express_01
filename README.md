@@ -3,13 +3,8 @@
 ## Installation
 
 ```
-npm i typescript -g
-npm i ts-node -g
-```
-
-```
-git clone https://github.com/naphattharawat/ts-node-db my-api
-cd my-api
+git clone https://github.com/naphattharawat/nan_express_01
+cd nan_express_01
 npm i
 ```
 
@@ -17,7 +12,7 @@ npm i
 
 ```
 cp .env.example.txt .env
-npm start
+nodemon
 ```
 
 open browser and go to http://localhost:3000
