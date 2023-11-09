@@ -6,4 +6,8 @@ export class Login {
       .where('password', password)
       .limit(1);
   }
+
+  getRight(db: Knex.QueryInterface, id) {
+    return db.table('user_right').where('user_id', id)
+  }
 }

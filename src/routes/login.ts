@@ -4,7 +4,7 @@ import * as express from 'express';
 import { Router, Request, Response } from 'express';
 import * as HttpStatus from 'http-status-codes';
 import * as crypto from 'crypto';
-
+import * as _ from 'lodash';
 import { Login } from '../models/login';
 
 import { Jwt } from '../models/jwt';
@@ -22,8 +22,10 @@ router.post('/', async (req: Request, res: Response) => {
     let encPassword = crypto.createHash('md5').update(password).digest('hex');
     let rs: any = await loginModel.login(db, username, encPassword);
     if (rs.length) {
+      const right = await loginModel.getRight(db, rs[0].id);
       let payload = {
         fullname: `${rs[0].first_name} ${rs[0].last_name}`,
+        right: _.map(right, (r) => { return r.code }),
         id: rs[0].id,
       }
       let token = jwt.sign(payload);
